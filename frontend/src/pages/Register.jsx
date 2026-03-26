@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import UserContext from '../context/UserContext';
+import { useContext } from 'react';
 export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,6 +9,7 @@ export default function Register() {
     email: '',
     password: '',
   });
+  const{handleRegister}=useContext(UserContext)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,6 +17,7 @@ export default function Register() {
 
   const handleSubmit = async () => {
     try {
+      await handleRegister(formData);
       console.log(formData);
     } catch (error) {
       console.log(error);
